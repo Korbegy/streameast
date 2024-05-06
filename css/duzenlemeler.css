@@ -1,0 +1,127 @@
+.GirisYapDuzen{
+  margin:auto;
+  text-align:center
+}
+
+.GirisYapDuzen h1{
+  text-align:center
+}
+
+.GirisYapDuzen form{
+  margin-bottom:30px
+}
+
+.GirisYapDuzen form input[type=text],.GirisYapDuzen form input[type=password]{
+  width:100%;
+  padding:12px;
+  margin-bottom:5px;
+  border:1px solid #ddd;
+  border-radius:2px;
+  font-family:titillium web,Helvetica,sans-serif;
+  font-size:15px
+}
+
+.GirisYapDuzen form input[type=submit]{
+  width:100%;
+  padding:12px;
+  margin-bottom:5px;
+  border:none;
+  background-color:#e10601;
+  font-family:titillium web,Helvetica,sans-serif;
+  font-size:16px;
+  color:#fff;
+  cursor:pointer
+}
+
+.GirisYapDuzen .ParolamiUnuttum{
+  text-align:center
+}
+
+.GirisYapDuzen .ParolamiUnuttum:hover{
+  border-bottom:2px solid #fff
+}
+
+#MailOnay{
+  position:fixed;
+  top:0;
+  z-index:999;
+  margin-bottom:10px;
+  width:100%;
+  background-color:#30303c;
+  height:50px;
+  border-bottom:3px solid #fff;
+  text-align:center;
+  color:#fff;
+  line-height:40px;
+  overflow:auto
+}
+
+.CikisYap{
+  background-color:#1e5686!important;
+  color:#fff!important
+}
+
+.CikisYap:hover{
+  background-color:#3c75a7!important;
+  color:#fff!important
+}
+
+.custom-select{
+  position:relative;
+  font-family:Arial;
+  background-color:#fff;
+  border:1px solid #ddd;
+  border-radius:5px;
+  z-index:9
+}
+
+.custom-select select{
+  display:none
+}
+
+.select-selected{
+  background-color:#fff;
+  border:1px solid #ddd;
+  border-radius:5px
+}
+
+.select-selected:after{
+  position:absolute;
+  content:"";
+  top:14px;
+  right:10px;
+  width:0;
+  height:0;
+  border:6px solid transparent;
+  border-color:#fff transparent transparent transparent
+}
+
+.select-selected.select-arrow-active:after{
+  border-color:transparent transparent #fff transparent;
+  top:7px
+}
+
+.select-items div,.select-selected{
+  padding:8px 16px;
+  border:1px solid transparent;
+  border-color:transparent transparent rgba(0,0,0,.1) transparent;
+  cursor:pointer
+}
+
+.select-items{
+  position:absolute;
+  background-color:#fff;
+  border:1px solid #ddd;
+  top:100%;
+  left:0;
+  right:0;
+  z-index:99
+}
+
+.select-hide{
+  display:none
+}
+
+.select-items div:hover,.same-as-selected{
+  background-color:rgba(0,0,0,.1)
+}
