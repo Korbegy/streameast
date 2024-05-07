@@ -1,4 +1,4 @@
-async function fetchData(apiEndpoint, containerId) {
+ async function fetchData(apiEndpoint, containerId) {
     const response = await fetch(apiEndpoint);
     const data = await response.json();
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -221,40 +221,71 @@ getmmafixture()
 // -- end mma fixtuers -- //
 
 
-// boxing live stream
-async function main() {
-    const response = await fetch("https://boxingschedule.co/");
-    const src = await response.text();
-    const soup = new DOMParser().parseFromString(src, 'text/html');
-    const boxingDiv = document.getElementById("boxing");
+ // Boxing Matches 
+ async function main() {
+        const response = await fetch("https://boxingschedule.co/");
+        const src = await response.text();
+        const soup = new DOMParser().parseFromString(src, 'text/html');
+        const boxingDiv = document.querySelector("#boxing");
 
-    // Keywords to exclude
-    const exclude_keywords = ["Contact", "News", "Videos", "Tickets", "Rankings", "Results", "Gyms", "Live", "Crossover", "Top", "Follow Us", "Like Us", "Youtube", "Follow on IG", "Submit Boxing Event", "Privacy Policy", "About Us"];
+        // Keywords to exclude
+        const exclude_keywords = ["Contact", "News", "Videos", "Tickets", "Rankings", "Results", "Gyms", "Live", "Crossover", "Top", "Follow Us", "Like Us", "Youtube", "Follow on IG", "Submit Boxing Event", "Privacy Policy", "About Us"];
 
-    // Get today's date in the format "Month Day"
-    const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+        // Get today's date in the format "Month Day"
+        const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
 
-    // Object to store fights grouped by date
-    const fightsByDate = {};
+        // Object to store fights grouped by date
+        const fightsByDate = {};
 
-    // Find all <ul> elements containing fight information
-    const ul_elements = soup.querySelectorAll('ul');
+        // Find all <ul> elements containing fight information
+        const ul_elements = soup.querySelectorAll('ul');
 
-    ul_elements.forEach(ul => {
-        // Find the parent element containing the date
-        const date_parent = ul.previousElementSibling;
+        ul_elements.forEach(ul => {
+            // Find the parent element containing the date
+            const date_parent = ul.previousElementSibling;
 
-        if (date_parent) {
-            const date_strong = date_parent.querySelector('strong');
+            if (date_parent) {
+                const date_strong = date_parent.querySelector('strong');
 
-            if (date_strong) {
-                let date = date_strong.textContent.trim();
+                if (date_strong) {
+                    let date = date_strong.textContent.trim();
+                    // Extract only what's before the ":" character
+                    date = date.split(":")[0].trim();
+
+                    // Extract text from each <li> element within <ul>
+                    ul.querySelectorAll('li').forEach(li => {
+                        let fight_info = li.textContent.trim();
+                        if (!exclude_keywords.some(keyword => fight_info.includes(keyword))) {
+                            // Extract only what's before the comma (",") character
+                            fight_info = fight_info.split(",")[0].trim();
+
+                            // Group fights by date
+                            if (!fightsByDate[date]) {
+                                fightsByDate[date] = [];
+                            }
+                            fightsByDate[date].push(fight_info);
+                        }
+                    });
+                }
+            }
+        });
+
+        // Find all <p> elements containing fight information
+        const p_elements = soup.querySelectorAll('p');
+
+        p_elements.forEach(p => {
+            const strong_tag = p.querySelector('strong');
+
+            if (strong_tag) {
+                let date = strong_tag.textContent.trim();
                 // Extract only what's before the ":" character
                 date = date.split(":")[0].trim();
 
-                // Extract text from each <li> element within <ul>
-                ul.querySelectorAll('li').forEach(li => {
-                    let fight_info = li.textContent.trim();
+                // Extract fight details excluding the date
+                const fights = Array.from(p.querySelectorAll('br')).slice(1);
+
+                fights.forEach(fight => {
+                    let fight_info = fight.nextSibling.textContent.trim();
                     if (!exclude_keywords.some(keyword => fight_info.includes(keyword))) {
                         // Extract only what's before the comma (",") character
                         fight_info = fight_info.split(",")[0].trim();
@@ -267,93 +298,63 @@ async function main() {
                     }
                 });
             }
-        }
-    });
+        });
 
-    // Find all <p> elements containing fight information
-    const p_elements = soup.querySelectorAll('p');
+        // Create <div> elements for each date with associated fights
+        for (const date in fightsByDate) {
+            if (fightsByDate.hasOwnProperty(date)) {
+                const fightInfos = fightsByDate[date];
 
-    p_elements.forEach(p => {
-        const strong_tag = p.querySelector('strong');
+                // Create <ul> element for this date
+                const ulElement = document.createElement("ul");
+                ulElement.classList.add("f1-podium", "f1-color--carbonBlack");
+                ulElement.style.marginTop = "15px"; // Add margin-top
 
-        if (strong_tag) {
-            let date = strong_tag.textContent.trim();
-            // Extract only what's before the ":" character
-            date = date.split(":")[0].trim();
+                // Add bold <li> element with link to each <ul>
+                const boldLiElement = document.createElement("li");
+                boldLiElement.style.fontWeight = "bold";
+                boldLiElement.innerHTML = `
+                    <a class="f1-podium--link" href="#">
+                        <img style="width: 30px; height: 30px;" alt="" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png">
+                        <span style="padding-left: 3px;">Boxing</span>
+                    </a>
+                `;
+                ulElement.appendChild(boldLiElement);
 
-            // Extract fight details excluding the date
-            const fights = Array.from(p.querySelectorAll('br')).slice(1);
-
-            fights.forEach(fight => {
-                let fight_info = fight.nextSibling.textContent.trim();
-                if (!exclude_keywords.some(keyword => fight_info.includes(keyword))) {
-                    // Extract only what's before the comma (",") character
-                    fight_info = fight_info.split(",")[0].trim();
-
-                    // Group fights by date
-                    if (!fightsByDate[date]) {
-                        fightsByDate[date] = [];
-                    }
-                    fightsByDate[date].push(fight_info);
-                }
-            });
-        }
-    });
-
-    // Create <div> elements for each date with associated fights
-    for (const date in fightsByDate) {
-        if (fightsByDate.hasOwnProperty(date)) {
-            const fightInfos = fightsByDate[date];
-
-            // Create <ul> element for this date
-            const ulElement = document.createElement("ul");
-            ulElement.classList.add("f1-podium", "f1-color--carbonBlack");
-            ulElement.style.marginTop = "15px"; // Add margin-top
-
-            // Add bold <li> element with link to each <ul>
-            const boldLiElement = document.createElement("li");
-            boldLiElement.style.fontWeight = "bold";
-            boldLiElement.innerHTML = `
-                <a class="f1-podium--link" href="#">
-                    <img style="width: 30px; height: 30px;" alt="" src="https://a.espncdn.com/combiner/i?img=/redesign/assets/img/icons/ESPN-icon-boxing.png">
-                    <span style="padding-left: 3px;">Boxing</span>
-                </a>
-            `;
-            ulElement.appendChild(boldLiElement);
-
-            // Append all fight info for this date under the same <ul>
-            fightInfos.forEach(fight_info => {
-                if (fight_info.trim() !== '') { // Check if fight_info is not empty
-                    const liElement = document.createElement("li");
-                    liElement.innerHTML = `
-                        <a href="https://boxing.krbgy.xyz/#${fight_info}" target="_blank" class="f1-podium--link f1-bg--white">
-                            <span class="f1-podium--rank f1-bold--xs" style="min-width: 35px;width: unset;">UFC</span>
-                            <span class="team-color-icon" style="background:#00D2BE"></span>
-                            <span class="f1-podium--driver f1--xs MacBaslik">
-                                <span class="d-md-inline f1-capitalize">${fight_info}</span>
-                            </span>
-                            <span class="f1-podium-right">
-                                <span class="f1-podium--time f1-label f1-bg--gray2 misc--label text-semi-bold">
-                                    ${date === today ? `<button class="event-button" onclick="handleButtonClick('${fight_info}')">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
-                                            <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
-                                        </svg> Live
-                                    </button>` : date}
+                // Append all fight info for this date under the same <ul>
+                fightInfos.forEach(fight_info => {
+                    if (fight_info.trim() !== '') { // Check if fight_info is not empty
+                        const liElement = document.createElement("li");
+                        liElement.innerHTML = `
+                            <a href="https://boxing.krbgy.xyz/#${fight_info}" target="_blank" class="f1-podium--link f1-bg--white">
+                                <span class="f1-podium--rank f1-bold--xs" style="min-width: 35px;width: unset;">Boxing</span>
+                                <span class="team-color-icon" style="background:#00D2BE"></span>
+                                <span class="f1-podium--driver f1--xs MacBaslik">
+                                    <span class="d-md-inline f1-capitalize">${fight_info}</span>
                                 </span>
-                                <i class="icon icon-chevron-right f1-color--warmRed"></i>
-                            </span>
-                        </a>
-                    `;
-                    ulElement.appendChild(liElement);
-                }
-            });
+                                <span class="f1-podium-right">
+                                    <span class="f1-podium--time f1-label f1-bg--gray2 misc--label text-semi-bold">
+                                        ${date === today ? `<button class="event-button" onclick="handleButtonClick('${fight_info}')">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 58" height="15" width="15">
+                                                <path stroke-width="9" stroke="currentColor" d="M44.25 36.3612L17.25 51.9497C11.5833 55.2213 4.5 51.1318 4.50001 44.5885L4.50001 13.4115C4.50001 6.86824 11.5833 2.77868 17.25 6.05033L44.25 21.6388C49.9167 24.9104 49.9167 33.0896 44.25 36.3612Z"></path>
+                                            </svg> Live
+                                        </button>` : date}
+                                    </span>
+                                    <i class="icon icon-chevron-right f1-color--warmRed"></i>
+                                </span>
+                            </a>
+                        `;
+                        ulElement.appendChild(liElement);
+                    }
+                });
 
-            // Append the <ul> element directly to the boxingDiv
-            boxingDiv.appendChild(ulElement);
+                // Append the <ul> element directly to the boxingDiv
+                boxingDiv.appendChild(ulElement);
+            }
         }
     }
-}
 
-main();
-
-// end of boxing stream  
+    // Run the main function after the DOM content is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+        main();
+    });
