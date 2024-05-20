@@ -80,7 +80,7 @@ function processFixtures(data, league, containerId) {
                                         ${homeTeam.team.displayName} vs ${awayTeam.team.displayName}
                                     </div>
                                     <div id='timeofthematch' class="col-3">
-                                        <div class="live">LIVE NOW!</div>
+                                        <span class="live">LIVE NOW!</span>
                                     </div>
                                 </div>
                             </div>
