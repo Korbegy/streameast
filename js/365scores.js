@@ -14,7 +14,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
 
     // Render all scheduled and live games
     for (const sport of Sports) {
-        if (sport.statusText !== "Ended" && sport.statusText !== "Postponed" && sport.statusText !== "Final" && sport.statusText !== "Final (OT)" && sport.statusText !== "After Penalties" && sport.statusText !== "Postponed" && sport.statusText !== "Final (SO)") {
+        if (sport.statusText !== "Ended" && sport.statusText !== "Postponed" && sport.statusText !== "Final" && sport.statusText !== "Final (OT)" && sport.statusText !== "After Penalties" && sport.statusText !== "Postponed" && sport.statusText !== "Final (SO)" && sport.statusText !== "Final (Ex)") {
             const gameDate = new Date(sport.startTime);
             if (
                 gameDate.getDate() === today.getDate() &&
@@ -72,9 +72,9 @@ const fetchSportsData = async (apiUrl, containerId) => {
                         <div class="col-5">
                             ${homeTeam} vs ${awayTeam}
                         </div>
-                        <div id='timeofthematch' class="col-3">
-                            <div class="live">LIVE NOW!</div>
-                        </div>
+                        <div id="timeofthematch" class="col-3">
+                                        <span class="live">LIVE NOW!</span>
+                       </div>
                     </div>
                 </div>
             </div> 
