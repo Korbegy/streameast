@@ -143,3 +143,4 @@ fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&comp
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=8', 'facup');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=141', 'ligamx');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=623', 'afc');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=438', 'mlb');
