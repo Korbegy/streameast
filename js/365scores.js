@@ -8,7 +8,6 @@ const fetchSportsData = async (apiUrl, containerId) => {
     const Sports = data.games;
     const leagueName = data.competitions[0].name;
     const leagueSlug = data.competitions[0].nameForURL;
-
     const container = document.querySelector(`#${containerId}`);
     container.innerHTML = ''; // Clear the container before adding today's fixtures
 
@@ -16,6 +15,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
     for (const sport of Sports) {
         if (sport.statusText !== "Ended" && sport.statusText !== "Postponed" && sport.statusText !== "Final" && sport.statusText !== "Final (OT)" && sport.statusText !== "After Penalties" && sport.statusText !== "Postponed" && sport.statusText !== "Final (SO)" && sport.statusText !== "Final (Ex)" && sport.statusText !== "Abandoned") {
             const gameDate = new Date(sport.startTime);
+            if (sport.statusText === "Scheduled"){
             if (
                 gameDate.getDate() === today.getDate() &&
                 gameDate.getMonth() === today.getMonth() &&
@@ -49,7 +49,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
 
                 container.appendChild(teamContainer);
             }
-
+        }
             // If the game is live
             if (sport.statusText !== "Scheduled" && sport.statusText !== "Ended") {
                 const homeTeam = sport.homeCompetitor.name;
@@ -84,7 +84,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
             }
 
 
-            // If the game is live
+            // If the game is ended
             if (sport.statusText === "Ended" && sport.statusText === "Final" && sport.statusText === "Final (OT)" && sport.statusText === "After Penalties") {
                 const homeTeam = sport.homeCompetitor.name;
                 const awayTeam = sport.awayCompetitor.name;
