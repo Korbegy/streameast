@@ -144,3 +144,8 @@ fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&comp
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=141', 'ligamx');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=623', 'afc');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=438', 'mlb');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=275', 'rolandgarroswomen');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=209', 'rolandgarrosmen');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=215', 'wimbledonmen');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=230', 'usopenmen');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=183', 'australianopenmen');
