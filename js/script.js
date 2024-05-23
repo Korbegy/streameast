@@ -270,7 +270,7 @@ async function getf1fixture() {
                   ${nameofevent}
               </div>
               <div id='timeofthematch' class="col-3">
-                  <td id='timetd' width='1%'><span id='time'></span></td>
+                  <td id='timetd' width='1%'><div id='time'></div></td>
               </div>
               </div>
           </div>
