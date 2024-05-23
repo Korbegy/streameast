@@ -503,7 +503,7 @@ async function processGolfData(data, containerId) {
       const startTime = new Date(event.date);
       const currentTime = new Date();
 
-      const golfurl = `https://golf.krbgy.xyz/#${eventname}`;
+      const golfurl = `https://live.krbgy.xyz/#${eventname}`;
       const container = document.querySelector(`#${containerId}`);
       const teamContainer = document.createElement('div');
       let innerHTMLContent = `
