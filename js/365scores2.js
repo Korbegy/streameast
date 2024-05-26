@@ -62,7 +62,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://stream.krbgy.xyz/#${sport.id}#${leagueSlug}`;
+                const link = `https://soccer.streameast.uno/#${homeTeam} vs ${awayTeam}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
@@ -94,7 +94,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://stream.krbgy.xyz/#${sport.id}#${leagueSlug}`;
+                const link = `https://soccer.streameast.uno/#${homeTeam} vs ${awayTeam}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
