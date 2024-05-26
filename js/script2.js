@@ -210,21 +210,6 @@ for (const league of leagues) {
     fetchData(apiUrl, league.name, league.id);
 }
 
-// Search box functionality
-const searchBox = document.getElementById('searchBox');
-const matchesContainer = document.getElementById('matchesContainer');
-
-searchBox.addEventListener('input', () => {
-    const query = searchBox.value.toLowerCase();
-    const events = matchesContainer.getElementsByClassName('event');
-    for (const event of events) {
-        if (event.innerText.toLowerCase().includes(query)) {
-            event.classList.remove('hidden');
-        } else {
-            event.classList.add('hidden');
-        }
-    }
-});
 
 
 
