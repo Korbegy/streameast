@@ -560,3 +560,117 @@ async function getGolfFixtures() {
 
 getGolfFixtures();
 // end of golf // 
+
+
+// indy racing //
+
+const indyapi = `https://site.api.espn.com/apis/site/v2/sports/racing/irl/scoreboard?dates=${formattedDate}`;
+async function getindy() {
+  const response = await fetch(`${indyapi}`);
+  const data = await response.json();
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const today = new Date();
+  const currentDayOfWeek = today.getDay();
+  const league = data.leagues;
+  const Slug = league[0].slug;
+  const indylogo = league[0].logos[0].href;
+  const events = data.events;
+  let matchesFound = false;
+  for (const event of events) {
+      if (event.status.type.description !== "Postponed"){
+        const indyrace = event.name;
+        const detail = event.status.type.detail;
+        const eventId = event.id;
+        const eventDate = new Date(event.date);
+        const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
+        const eventDayOfWeek = eventDate.getDay();
+        const startTime = new Date(event.date);
+        const currentTime = new Date();
+
+        console.log(events);
+  const indyurl = `https://soccer.streameast.uno/#${indyrace}`;
+  if (event.status.type.state === "pre" ){
+     const container = document.querySelector('#indy');
+    const teamContainer = document.createElement('div');
+       
+        teamContainer.innerHTML = `
+        <div class="row" onclick="window.open('${indyurl}', '_blank')">
+        <div id='matchcard' class="col column mt-1">
+        <div class="row">
+        <div class="col-3">
+            <span id='leaguenames'>IndyCar</span>
+        </div>
+        <div id='afterleaguename' class="col-1"></div>
+        <div class="col-5">
+            ${indyrace}
+        </div>
+        <div id='timeofthematch' class="col-3">
+            ${estTimeStr}
+        </div>
+    </div>
+    </div></div>`;
+    container.appendChild(teamContainer); 
+      
+  }
+if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
+        const container = document.querySelector('#indy');
+    const teamContainer = document.createElement('div');
+       
+        teamContainer.innerHTML = `
+        <div class="row" onclick="window.open('${indyurl}', '_blank')">
+        <div id='matchcard' class="col column mt-1">
+        <div class="row">
+        <div class="col-3">
+            <span id='leaguenames'>IndyCar</span>
+        </div>
+        <div id='afterleaguename' class="col-1"></div>
+        <div class="col-5">
+            ${indyrace}
+        </div>
+        <div id='timeofthematch' class="col-3">
+        <span class="live">LIVE NOW!</span>
+        </div>
+    </div>
+    </div></div>`;
+    container.appendChild(teamContainer);
+   
+}
+// لو الماتش خلص // 
+ if (event.status.type.state === "post") {
+    
+    const container = document.querySelector('#indy');
+    const teamContainer = document.createElement('div');
+       
+        teamContainer.innerHTML = `
+        <div class="row" onclick="window.open('${indyurl}', '_blank')">
+        <div id='matchcard' class="col column mt-1">
+        <div class="row">
+        <div class="col-3">
+            <span id='leaguenames'>IndyCar</span>
+        </div>
+        <div id='afterleaguename' class="col-1"></div>
+        <div class="col-5">
+            ${indyrace}
+        </div>
+        <div id='timeofthematch' class="col-3">
+        <span class="live">FINISHED!</span>
+        </div>
+    </div>
+    </div></div>`;
+    container.appendChild(teamContainer);
+   
+     
+ }
+ 
+matchesFound = true;
+ 
+}
+}
+ //   IF NO MATCHES TODAY SHOW THIS CODE 
+ if (!matchesFound) {document.getElementById("indy").style.display = "none";}
+}
+getindy()
+
+// -- end indy fixtuers -- //
+
+
