@@ -15,47 +15,50 @@ const fetchSportsData = async (apiUrl, containerId) => {
     for (const sport of Sports) {
         if (sport.statusText !== "Ended" && sport.statusText !== "Postponed" && sport.statusText !== "Final" && sport.statusText !== "Final (OT)" && sport.statusText !== "After Penalties" && sport.statusText !== "Postponed" && sport.statusText !== "Final (SO)" && sport.statusText !== "Final (Ex)" && sport.statusText !== "Abandoned") {
             const gameDate = new Date(sport.startTime);
-            if (sport.statusText === "Scheduled"){
-            if (
-                gameDate.getDate() === today.getDate() &&
-                gameDate.getMonth() === today.getMonth() &&
-                gameDate.getFullYear() === today.getFullYear()
-            ) {
-                const estTimeStr = gameDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            if (sport.statusText === "Scheduled") {
+                if (
+                    gameDate.getDate() === today.getDate() &&
+                    gameDate.getMonth() === today.getMonth() &&
+                    gameDate.getFullYear() === today.getFullYear()
+                ) {
+                    const estTimeStr = gameDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    matchesFound = true;
+                    const homeTeam = sport.homeCompetitor.name;
+                    const awayTeam = sport.awayCompetitor.name;
+                    const HLogo = sport.homeCompetitor.id;
+                    const ALogo = sport.awayCompetitor.id;
+                    const link = `https://soccer.streameast.uno/#${homeTeam} vs ${awayTeam}`;
+
+                    const teamContainer = document.createElement('div');
+                    teamContainer.innerHTML = `
+                    <div class="row" onclick="window.open('${link}', '_blank')">
+                        <div id='matchcard' class="col column mt-1">
+                            <div class="row">
+                                <div class="col-3">
+                                    <span id='leaguenames'>${leagueName}</span>
+                                </div>
+                                <div id='afterleaguename' class="col-1"></div>
+                                <div class="col-5">
+                                    ${homeTeam} vs ${awayTeam}
+                                </div>
+                                <div id='timeofthematch' class="col-3">
+                                    ${estTimeStr}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+
+                    container.appendChild(teamContainer);
+                }
+            }
+            // If the game is live
+            if (sport.statusText !== "Scheduled" && sport.statusText !== "Ended") {
                 matchesFound = true;
                 const homeTeam = sport.homeCompetitor.name;
                 const awayTeam = sport.awayCompetitor.name;
                 const HLogo = sport.homeCompetitor.id;
                 const ALogo = sport.awayCompetitor.id;
-                const link = `https://soccer.streameast.uno/#${homeTeam} vs ${awayTeam}`;
-
-                const teamContainer = document.createElement('div');
-                teamContainer.innerHTML = `
-                <div class="row" onclick="window.open('${link}', '_blank')">
-                <div id='matchcard' class="col column mt-1">
-                    <div class="row">
-                        <div class="col-3">
-                            <span id='leaguenames'>${leagueName}</span>
-                        </div>
-                        <div id='afterleaguename' class="col-1"></div>
-                        <div class="col-5">
-                            ${homeTeam} vs ${awayTeam}
-                        </div>
-                        <div id='timeofthematch' class="col-3">
-                            ${estTimeStr}
-                        </div>
-                    </div>
-                `;
-
-                container.appendChild(teamContainer);
-            }
-        }
-            // If the game is live
-            if (sport.statusText !== "Scheduled" && sport.statusText !== "Ended") {
-                const homeTeam = sport.homeCompetitor.name;
-                const awayTeam = sport.awayCompetitor.name;
-                const HLogo = sport.homeCompetitor.id;
-                const ALogo = sport.awayCompetitor.id;
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
@@ -63,29 +66,27 @@ const fetchSportsData = async (apiUrl, containerId) => {
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
-                <div id='matchcard' class="col column mt-1">
-                    <div class="row">
-                        <div class="col-3">
-                            <span id='leaguenames'>${leagueName}</span>
+                    <div id='matchcard' class="col column mt-1">
+                        <div class="row">
+                            <div class="col-3">
+                                <span id='leaguenames'>${leagueName}</span>
+                            </div>
+                            <div id='afterleaguename' class="col-1"></div>
+                            <div class="col-5">
+                                ${homeTeam} vs ${awayTeam}
+                            </div>
+                            <div id="timeofthematch" class="col-3">
+                                <span class="live">LIVE NOW!</span>
+                            </div>
                         </div>
-                        <div id='afterleaguename' class="col-1"></div>
-                        <div class="col-5">
-                            ${homeTeam} vs ${awayTeam}
-                        </div>
-                        <div id="timeofthematch" class="col-3">
-                                        <span class="live">LIVE NOW!</span>
-                       </div>
                     </div>
-                </div>
-            </div> 
-                `;
+                </div>`;
 
                 container.appendChild(teamContainer);
             }
-
 
             // If the game is ended
-            if (sport.statusText === "Ended" && sport.statusText === "Final" && sport.statusText === "Final (OT)" && sport.statusText === "After Penalties") {
+            if (sport.statusText === "Ended" || sport.statusText === "Final" || sport.statusText === "Final (OT)" || sport.statusText === "After Penalties") {
                 const homeTeam = sport.homeCompetitor.name;
                 const awayTeam = sport.awayCompetitor.name;
                 const HLogo = sport.homeCompetitor.id;
@@ -97,22 +98,21 @@ const fetchSportsData = async (apiUrl, containerId) => {
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
-                <div id='matchcard' class="col column mt-1">
-                    <div class="row">
-                        <div class="col-3">
-                            <span id='leaguenames'>${leagueName}</span>
-                        </div>
-                        <div id='afterleaguename' class="col-1"></div>
-                        <div class="col-5">
-                            ${homeTeam} ${hometeamscore} : ${awayTeam} ${awayteamscore}
-                        </div>
-                        <div id='timeofthematch' class="col-3">
-                        <div id="end"><strong>Full Time</strong></div>
+                    <div id='matchcard' class="col column mt-1">
+                        <div class="row">
+                            <div class="col-3">
+                                <span id='leaguenames'>${leagueName}</span>
+                            </div>
+                            <div id='afterleaguename' class="col-1"></div>
+                            <div class="col-5">
+                                ${homeTeam} ${hometeamscore} : ${awayTeam} ${awayteamscore}
+                            </div>
+                            <div id='timeofthematch' class="col-3">
+                                <div id="end"><strong>Full Time</strong></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div> 
-                `;
+                </div>`;
 
                 container.appendChild(teamContainer);
             }
@@ -121,6 +121,8 @@ const fetchSportsData = async (apiUrl, containerId) => {
 
     if (!matchesFound) {
         container.style.display = 'none';
+    } else {
+        container.style.display = ''; // Ensure the container is visible if matches are found
     }
 };
 
