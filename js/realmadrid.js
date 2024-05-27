@@ -1,6 +1,6 @@
 const realmadrid = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=131`;
 const barcelona = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=132`;
-const liverpool = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=109`;
+const liverpool = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=108`;
 const manunited = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=105`;
 const mancity = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=110`;
 const arsenal = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=104`;
