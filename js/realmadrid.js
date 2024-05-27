@@ -5,7 +5,7 @@ const manunited = `https://webws.365scores.com/web/games/current/?appTypeId=5&co
 const mancity = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=110`;
 const arsenal = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=104`;
 const chelsea = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=106`;
-
+const novak = `https://webws.365scores.com/web/games/current/?appTypeId=5&competitors=2409`;
 async function fetchDataTeams(url) {
     const response = await fetch(url);
     return response.json();
@@ -92,3 +92,4 @@ getTeamMatches(manunited, 'manunited');
 getTeamMatches(mancity, 'mancity');
 getTeamMatches(arsenal, 'arsenal');
 getTeamMatches(chelsea, 'chelsea');
+getTeamMatches(novak, 'novak');
