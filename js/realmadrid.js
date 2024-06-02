@@ -37,7 +37,7 @@ async function getTeamMatches(url, containerId) {
             });
             const minu = match.gameTimeDisplay;
             const gameID = match.id;
-            const link = `https://soccer.streameast.uno/#${homeTeam} vs ${awayTeam}`;
+            const link = `https://streameast.krbgy.xyz/#${homeTeam} vs ${awayTeam}`;
 
             let teamContainer = document.createElement('div');
             if (match.statusText === "Scheduled") {
