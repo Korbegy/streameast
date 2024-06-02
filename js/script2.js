@@ -238,7 +238,7 @@ async function getf1fixture() {
         const startTime = new Date(competition.date);
         const currentTime = new Date();
 
-        const formula_URL = `https://soccer.streameast.monster#${nameofevent}`;
+        const formula_URL = `https://streameast.krbgy.xyz#${nameofevent}`;
         if (competition.status.type.state === "pre") {
           const container = document.querySelector('#formula1');
           const teamContainer = document.createElement('div');
@@ -373,7 +373,7 @@ async function getmmafixture() {
         const currentTime = new Date();
 
         console.log(events);
-  const mma_URL = `https://soccer.streameast.monster/#${fightnight}`;
+  const mma_URL = `https://streameast.krbgy.xyz/#${fightnight}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#UFC');
     const teamContainer = document.createElement('div');
@@ -488,7 +488,7 @@ async function processGolfData(data, containerId) {
       const startTime = new Date(event.date);
       const currentTime = new Date();
 
-      const golfurl = `https://soccer.streameast.monster/#${eventname}`;
+      const golfurl = `https://streameast.krbgy.xyz/#${eventname}`;
       const container = document.querySelector(`#${containerId}`);
       const teamContainer = document.createElement('div');
       let innerHTMLContent = `
@@ -574,7 +574,7 @@ async function getindy() {
         const currentTime = new Date();
 
         console.log(events);
-  const indyurl = `https://soccer.streameast.monster/#${indyrace}`;
+  const indyurl = `https://streameast.krbgy.xyz/#${indyrace}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#indy');
     const teamContainer = document.createElement('div');
