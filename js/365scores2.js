@@ -27,7 +27,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                     const awayTeam = sport.awayCompetitor.name;
                     const HLogo = sport.homeCompetitor.id;
                     const ALogo = sport.awayCompetitor.id;
-                    const link = `https://soccer.streameast.monster/#${homeTeam} vs ${awayTeam}`;
+                    const link = `https://streameast.krbgy.xyz/#${homeTeam} vs ${awayTeam}`;
 
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
