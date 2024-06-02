@@ -58,7 +58,7 @@ function processFixtures(data, league, containerId) {
                 const homeTeam = event.competitions[0].competitors[0];
                 const awayTeam = event.competitions[0].competitors[1];
                 const eventId = event.id;
-                const match_URL = `https://soccer.streameast.monster/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
+                const match_URL = `https://streameast.krbgy.xyz/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
 
                 if (event.status.type.state === "pre") {
                     let eventHtml = createEventHtml(homeTeam, awayTeam, leagueAbbreviation, match_URL, estTimeStr);
