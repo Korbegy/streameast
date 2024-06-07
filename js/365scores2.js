@@ -13,7 +13,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
 
     // Render all scheduled and live games
     for (const sport of Sports) {
-        if (sport.statusText !== "Ended" && sport.statusText !== "Postponed" && sport.statusText !== "Final" && sport.statusText !== "Final (OT)" && sport.statusText !== "After Penalties" && sport.statusText !== "Postponed" && sport.statusText !== "Final (SO)" && sport.statusText !== "Final (Ex)" && sport.statusText !== "Abandoned") {
+        if (sport.statusText !== "Ended" && sport.statusText !== "WalkOver" && sport.statusText !== "Postponed" && sport.statusText !== "Final" && sport.statusText !== "Final (OT)" && sport.statusText !== "After Penalties" && sport.statusText !== "Postponed" && sport.statusText !== "Final (SO)" && sport.statusText !== "Final (Ex)" && sport.statusText !== "Abandoned") {
             const gameDate = new Date(sport.startTime);
             if (sport.statusText === "Scheduled") {
                 if (
