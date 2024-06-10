@@ -152,4 +152,6 @@ fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&comp
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=230', 'usopenmen');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=183', 'australianopenmen');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=106', 'wnba');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=216', 'stuttgart');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=7842', 'valencia');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=6316', 'euro2024');
