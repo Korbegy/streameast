@@ -658,119 +658,73 @@ matchesFound = true;
 getindy()
 
 
-    
-// ufc new version//
-
-
-const ufcmma = `https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard`;
-async function getufcfixture() {
-  const response = await fetch(`${ufcmma}`);
-  const data = await response.json();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const today = new Date();
-  const currentDayOfWeek = today.getDay();
-  const league = data.leagues;
-  const Slug = league[0].slug;
-  const ufclogo = league[0].logos[0].href;
-  const events = data.events;
-  let matchesFound = false;
-  for (const event of events) {
-      if (event.status.type.description !== "Postponed"){
-        const fightnight = event.name;
-        const detail = event.status.type.detail;
-        const eventId = event.id;
-        const eventDate = new Date(event.date);
-        const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });   
-        const eventDayOfWeek = eventDate.getDay();
-        const startTime = new Date(event.date);
-        const currentTime = new Date();
-        const eventday = event.date.split('T')[0];;
-        console.log(events);
-  const mma_URL = `https://live.crackstreamss.online/#${fightnight}`;
-  if (event.status.type.state === "pre" ){
-     const container = document.querySelector('#ufcmma');
-    const teamContainer = document.createElement('div');
-       
-        teamContainer.innerHTML = `
-        <div class="row" onclick="window.open('${mma_URL}', '_blank')">
-        <div id='matchcard' class="col column mt-1">
-        <div class="row">
-        <div class="col-3">
-            <span id='leaguenames'>UFC</span>
-        </div>
-        <div id='afterleaguename' class="col-1"></div>
-        <div class="col-5">
-            ${fightnight}
-        </div>
-        <div id='timeofthematch' class="col-3">
-            ${estTimeStr} - ${eventday}
-        </div>
-    </div>
-    </div></div>`;
-    container.appendChild(teamContainer); 
-      
-  }
-if (event.status.type.state === "in" || (event.status.type.description === "Halftime")) {
-        const container = document.querySelector('#ufcmma');
-    const teamContainer = document.createElement('div');
-       
-        teamContainer.innerHTML = `
-        <div class="row" onclick="window.open('${mma_URL}', '_blank')">
-        <div id='matchcard' class="col column mt-1">
-        <div class="row">
-        <div class="col-3">
-            <span id='leaguenames'>UFC</span>
-        </div>
-        <div id='afterleaguename' class="col-1"></div>
-        <div class="col-5">
-            ${fightnight}
-        </div>
-        <div id='timeofthematch' class="col-3">
-        <span class="live">LIVE NOW!</span>
-        </div>
-    </div>
-    </div></div>`;
-    container.appendChild(teamContainer);
-   
-}
-// لو الماتش خلص // 
- if (event.status.type.state === "post") {
-    
-    const container = document.querySelector('#ufcmma');
-    const teamContainer = document.createElement('div');
-       
-        teamContainer.innerHTML = `
-        <div class="row" onclick="window.open('${mma_URL}', '_blank')">
-        <div id='matchcard' class="col column mt-1">
-        <div class="row">
-        <div class="col-3">
-            <span id='leaguenames'>UFC</span>
-        </div>
-        <div id='afterleaguename' class="col-1"></div>
-        <div class="col-5">
-            ${fightnight}
-        </div>
-        <div id='timeofthematch' class="col-3">
-        <span class="live">FINISHED!</span>
-        </div>
-    </div>
-    </div></div>`;
-    container.appendChild(teamContainer);
-   
-     
- }
- 
-matchesFound = true;
- 
-}
-}
- //   IF NO MATCHES TODAY SHOW THIS CODE 
- if (!matchesFound) {document.getElementById("ufcmma").style.display = "none";}
-}
-getufcfixture()
-
-// -- end of ufc new version -- //
-
 // -- end indy fixtuers -- //
 
+
+
+// ufc new version//
+
+const ufcmma = `https://site.api.espn.com/apis/site/v2/sports/mma/ufc/scoreboard`;
+const pflmma = `https://site.api.espn.com/apis/site/v2/sports/mma/pfl/scoreboard`;
+
+async function getMMAFixtures() {
+  const [ufcResponse, pflResponse] = await Promise.all([fetch(ufcmma), fetch(pflmma)]);
+  const ufcData = await ufcResponse.json();
+  const pflData = await pflResponse.json();
+
+  const leagues = [...ufcData.leagues, ...pflData.leagues];
+  const events = [...ufcData.events, ...pflData.events];
+  const container = document.querySelector('#ufcmma');
+
+  let matchesFound = false;
+
+  for (const event of events) {
+    if (event.status.type.description !== "Postponed") {
+      const league = leagues.find(l => l.id === event.leagueId);
+      const leagueName = league ? league.shortName : 'MMA';
+      const fightnight = event.name;
+      const eventDate = new Date(event.date);
+      const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const eventday = event.date.split('T')[0];
+      const mma_URL = `https://live.crackstreamss.online/#${fightnight}`;
+
+      let statusHTML = '';
+      if (event.status.type.state === "pre") {
+        statusHTML = `${estTimeStr} - ${eventday}`;
+      } else if (event.status.type.state === "in" || event.status.type.description === "Halftime") {
+        statusHTML = `<span class="live">LIVE NOW!</span>`;
+      } else if (event.status.type.state === "post") {
+        statusHTML = `<span class="live">FINISHED!</span>`;
+      }
+
+      const teamContainer = document.createElement('div');
+      teamContainer.innerHTML = `
+        <div class="row" onclick="window.open('${mma_URL}', '_blank')">
+          <div id='matchcard' class="col column mt-1">
+            <div class="row">
+              <div class="col-3">
+                <span id='leaguenames'>${leagueName}</span>
+              </div>
+              <div id='afterleaguename' class="col-1"></div>
+              <div class="col-5">
+                ${fightnight}
+              </div>
+              <div id='timeofthematch' class="col-3">
+                ${statusHTML}
+              </div>
+            </div>
+          </div>
+        </div>`;
+      container.appendChild(teamContainer);
+      matchesFound = true;
+    }
+  }
+
+  if (!matchesFound) {
+    document.getElementById("ufcmma").style.display = "none";
+  }
+}
+
+getMMAFixtures();
+// end of new mma fixtures 
 
