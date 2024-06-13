@@ -27,7 +27,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                     const awayTeam = sport.awayCompetitor.name;
                     const HLogo = sport.homeCompetitor.id;
                     const ALogo = sport.awayCompetitor.id;
-                    const link = `https://streameast.krbgy.xyz/#${homeTeam} vs ${awayTeam}`;
+                    const link = `https://live.crackstreamss.online/#${homeTeam} vs ${awayTeam}`;
 
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -62,7 +62,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://streameast.krbgy.xyz/#${homeTeam} vs ${awayTeam}`;
+                const link = `https://live.crackstreamss.online/#${homeTeam} vs ${awayTeam}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
@@ -94,7 +94,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://streameast.krbgy.xyz/#${homeTeam} vs ${awayTeam}`;
+                const link = `https://live.crackstreamss.online/#${homeTeam} vs ${awayTeam}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
