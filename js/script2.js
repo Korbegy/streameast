@@ -58,7 +58,7 @@ function processFixtures(data, league, containerId) {
                 const homeTeam = event.competitions[0].competitors[0];
                 const awayTeam = event.competitions[0].competitors[1];
                 const eventId = event.id;
-                const match_URL = `https://streameast.krbgy.xyz/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
+                const match_URL = `https://live.crackstreamss.online/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
 
                 if (event.status.type.state === "pre") {
                     let eventHtml = createEventHtml(homeTeam, awayTeam, leagueAbbreviation, match_URL, estTimeStr);
@@ -238,7 +238,7 @@ async function getf1fixture() {
         const startTime = new Date(competition.date);
         const currentTime = new Date();
 
-        const formula_URL = `https://streameast.krbgy.xyz#${nameofevent}`;
+        const formula_URL = `https://live.crackstreamss.online#${nameofevent}`;
         if (competition.status.type.state === "pre") {
           const container = document.querySelector('#formula1');
           const teamContainer = document.createElement('div');
@@ -373,7 +373,7 @@ async function getmmafixture() {
         const currentTime = new Date();
 
         console.log(events);
-  const mma_URL = `https://streameast.krbgy.xyz/#${fightnight}`;
+  const mma_URL = `https://live.crackstreamss.online/#${fightnight}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#UFC');
     const teamContainer = document.createElement('div');
@@ -488,7 +488,7 @@ async function processGolfData(data, containerId) {
       const startTime = new Date(event.date);
       const currentTime = new Date();
 
-      const golfurl = `https://streameast.krbgy.xyz/#${eventname}`;
+      const golfurl = `https://live.crackstreamss.online/#${eventname}`;
       const container = document.querySelector(`#${containerId}`);
       const teamContainer = document.createElement('div');
       let innerHTMLContent = `
@@ -574,7 +574,7 @@ async function getindy() {
         const currentTime = new Date();
 
         console.log(events);
-  const indyurl = `https://streameast.krbgy.xyz/#${indyrace}`;
+  const indyurl = `https://live.crackstreamss.online/#${indyrace}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#indy');
     const teamContainer = document.createElement('div');
