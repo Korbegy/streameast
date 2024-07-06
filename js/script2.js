@@ -58,7 +58,7 @@ function processFixtures(data, league, containerId) {
                 const homeTeam = event.competitions[0].competitors[0];
                 const awayTeam = event.competitions[0].competitors[1];
                 const eventId = event.id;
-                const match_URL = `https://live.crackstreamss.online/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
+                const match_URL = `https://www.daddylivehd.info/#${homeTeam.team.shortDisplayName} vs ${awayTeam.team.shortDisplayName}`;
 
                 if (event.status.type.state === "pre") {
                     let eventHtml = createEventHtml(homeTeam, awayTeam, leagueAbbreviation, match_URL, estTimeStr);
@@ -238,7 +238,7 @@ async function getf1fixture() {
         const startTime = new Date(competition.date);
         const currentTime = new Date();
 
-        const formula_URL = `https://live.crackstreamss.online#${nameofevent}`;
+        const formula_URL = `https://www.daddylivehd.info#${nameofevent}`;
         if (competition.status.type.state === "pre") {
           const container = document.querySelector('#formula1');
           const teamContainer = document.createElement('div');
@@ -373,7 +373,7 @@ async function getmmafixture() {
         const currentTime = new Date();
 
         console.log(events);
-  const mma_URL = `https://live.crackstreamss.online/#${fightnight}`;
+  const mma_URL = `https://www.daddylivehd.info/#${fightnight}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#UFC');
     const teamContainer = document.createElement('div');
@@ -488,7 +488,7 @@ async function processGolfData(data, containerId) {
       const startTime = new Date(event.date);
       const currentTime = new Date();
 
-      const golfurl = `https://live.crackstreamss.online/#${eventname}`;
+      const golfurl = `https://www.daddylivehd.info/#${eventname}`;
       const container = document.querySelector(`#${containerId}`);
       const teamContainer = document.createElement('div');
       let innerHTMLContent = `
@@ -574,7 +574,7 @@ async function getindy() {
         const currentTime = new Date();
 
         console.log(events);
-  const indyurl = `https://live.crackstreamss.online/#${indyrace}`;
+  const indyurl = `https://www.daddylivehd.info/#${indyrace}`;
   if (event.status.type.state === "pre" ){
      const container = document.querySelector('#indy');
     const teamContainer = document.createElement('div');
@@ -686,7 +686,7 @@ async function getMMAFixtures() {
       const eventDate = new Date(event.date);
       const estTimeStr = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const eventday = event.date.split('T')[0];
-      const mma_URL = `https://live.crackstreamss.online/#${fightnight}`;
+      const mma_URL = `https://www.daddylivehd.info/#${fightnight}`;
 
       let statusHTML = '';
       if (event.status.type.state === "pre") {
