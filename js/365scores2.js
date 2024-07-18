@@ -158,3 +158,4 @@ fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&comp
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=240', 'madridopen');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=6316', 'euro2024');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=595', 'copa-america');
+fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=7244', 'nba-summer-leauge');
