@@ -27,7 +27,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                     const awayTeam = sport.awayCompetitor.name;
                     const HLogo = sport.homeCompetitor.id;
                     const ALogo = sport.awayCompetitor.id;
-                    const link = `https://v1.ppvfree.website/#${homeTeam} vs ${awayTeam}`;
+                    const link = `https://v2.ppvfree.website/#${homeTeam} vs ${awayTeam}`;
 
                     const teamContainer = document.createElement('div');
                     teamContainer.innerHTML = `
@@ -62,7 +62,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://v1.ppvfree.website/#${homeTeam} vs ${awayTeam}`;
+                const link = `https://v2.ppvfree.website/#${homeTeam} vs ${awayTeam}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
@@ -94,7 +94,7 @@ const fetchSportsData = async (apiUrl, containerId) => {
                 const hometeamscore = sport.homeCompetitor.score;
                 const awayteamscore = sport.awayCompetitor.score;
                 const minu = sport.gameTimeDisplay;
-                const link = `https://v1.ppvfree.website/#${homeTeam} vs ${awayTeam}`;
+                const link = `https://v2.ppvfree.website/#${homeTeam} vs ${awayTeam}`;
 
                 const teamContainer = document.createElement('div');
                 teamContainer.innerHTML = `<div class="row" onclick="window.open('${link}', '_blank')">
@@ -159,5 +159,6 @@ fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&comp
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=6316', 'euro2024');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=595', 'copa-america');
 fetchSportsData('https://webws.365scores.com/web/games/current/?appTypeId=5&competitions=7244', 'nba-summer-leauge');
+
 
 
