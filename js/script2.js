@@ -1,7 +1,8 @@
 (function() {
     const allowedDomains = [
         "www.sportsurge.uno",
-        "sportsurge.uno"       
+        "sportsurge.uno",
+        "sportsurge.wiki"
     ];
 
     const currentHost = window.location.hostname.toLowerCase().trim();
@@ -756,5 +757,6 @@ getMMAFixtures();
 
 
 })();
+
 
 
