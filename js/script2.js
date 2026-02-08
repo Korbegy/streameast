@@ -21,7 +21,7 @@
     
     // ── لو وصل هنا يبقى الدومين صح ──
     // باقي الكود بتاعك يبدأ من هنا
-})();
+
 
 let today = new Date();
 let year = today.getFullYear();
@@ -755,5 +755,6 @@ getMMAFixtures();
 
 
 
+})();
 
 
