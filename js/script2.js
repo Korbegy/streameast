@@ -1,3 +1,28 @@
+(function() {
+    const allowedDomains = [
+        "www.sportsurge.uno",
+        "sportsurge.uno"       
+    ];
+
+    const currentHost = window.location.hostname.toLowerCase().trim();
+
+    if (!allowedDomains.includes(currentHost)) {
+        // ريدايركت نهائي بدون إضافة للهيستوري
+        const targetUrl = "https://www.sportsurge.uno" + 
+                          window.location.pathname + 
+                          window.location.search + 
+                          window.location.hash;
+        
+        window.location.replace(targetUrl);
+        
+        // وقف تنفيذ باقي السكريبت فورًا
+        return;
+    }
+    
+    // ── لو وصل هنا يبقى الدومين صح ──
+    // باقي الكود بتاعك يبدأ من هنا
+})();
+
 let today = new Date();
 let year = today.getFullYear();
 let month = String(today.getMonth() + 1).padStart(2, '0');
@@ -727,6 +752,7 @@ async function getMMAFixtures() {
 
 getMMAFixtures();
 // end of new mma fixtures 
+
 
 
 
